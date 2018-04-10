@@ -2,7 +2,7 @@
 
 int main()
 {
-	char *function = "5*((12 - 5/8)/(110 - 55*10/10)*((55 + 6)/4 - 5*2)+(11/2 + 5))";
+	char *function = "32/2/2/2/2/2";  // kq = 1
 
 	QUEUE<ELEMENT> qFunc;
 	STACK<ELEMENT> sFunc;
@@ -34,7 +34,13 @@ int main()
 
 	// in tiền tố
 	std::cout << "TIEN TO: ";
-	for (QUEUENODE<ELEMENT> *curS = qBalanFuncPre.pHead; curS; curS = curS->pNext)
+	STACK<ELEMENT> printStack;
+	initStack(printStack);
+	for (QUEUENODE<ELEMENT> *cur = qBalanFuncPre.pHead; cur; cur = cur->pNext)
+	{
+		addTopStack(printStack, cur->data);
+	}
+	for (STACKNODE<ELEMENT> *curS = printStack.pHead; curS; curS = curS->pNext)
 	{
 		if (curS->data.type == OPERAND)
 			std::cout << curS->data.value;
@@ -53,6 +59,7 @@ int main()
 	destroyQueue(qBalanFuncPre);
 	destroyQueue(qFunc);
 	destroyStack(sFunc);
+	destroyStack(printStack);
 
 	_getch();
 	return 0;

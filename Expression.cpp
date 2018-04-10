@@ -140,7 +140,7 @@ void convertInfixToPostfix(QUEUE<ELEMENT> &qFunc, QUEUE<ELEMENT> &qBalanFunc)
 			break;
 		case OPERATOR:
 			if (!isEmpty(tempStack))
-				if(priorityOperator(topStack(tempStack).value) == 2)// dấu * hoặc dấu /
+				if(priorityOperator(topStack(tempStack).value) >= priorityOperator(element.value))// dấu * hoặc dấu /
 					addTailQueue(qBalanFunc, getTopStack(tempStack));
 
 			addTopStack(tempStack, element);
@@ -192,7 +192,7 @@ void convertInfixToPrefix(STACK<ELEMENT> &sFunc, QUEUE<ELEMENT> &qBalanFunc)
 			break;
 		case OPERATOR:
 			if (!isEmpty(tempStack))
-				if(priorityOperator(topStack(tempStack).value) == 2) // khi đầu của tempStack là dấu (* hoặc /)
+				if(priorityOperator(topStack(tempStack).value) > priorityOperator(element.value)) // khi đầu của tempStack là dấu (* hoặc /)
 					addTailQueue(qBalanFunc, getTopStack(tempStack));
 
 			addTopStack(tempStack, element);
